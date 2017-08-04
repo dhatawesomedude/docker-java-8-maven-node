@@ -20,6 +20,7 @@ RUN echo "# Installing Oracle JDK 8" && \
 ENV MAVEN_ROOT /var/lib/maven
 ENV MAVEN_HOME $MAVEN_ROOT/apache-maven-$MAVEN_VERSION
 ENV MAVEN_OPTS -Xms256m -Xmx512m
+ENV TZ=UTC
 
 RUN echo "# Installing Maven " && echo ${MAVEN_VERSION} && \
     wget --no-verbose -O /tmp/apache-maven-$MAVEN_VERSION.tar.gz \
@@ -43,3 +44,7 @@ RUN echo "# Installing Nodejs" && \
     npm cache clear -f && \
     npm install -g n && \
     n stable
+    
+  # Timezone
+  # ---------
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
