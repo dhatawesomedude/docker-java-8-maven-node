@@ -45,6 +45,12 @@ RUN echo "# Installing Nodejs" && \
     npm install -g n && \
     n stable
     
-  # Timezone
-  # ---------
+# Timezone
+# ---------
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# git-ratchet
+RUN wget --no-verbose -O /tmp/git-ratchet \
+    https://github.com/iangrunert/git-ratchet/releases/download/v0.3.2/linux_amd64_git-ratchet && \
+    cp /tmp/git-ratchet /usr/bin && \
+    chmod 700 /usr/bin/git-ratchet
