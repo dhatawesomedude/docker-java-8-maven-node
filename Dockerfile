@@ -49,8 +49,16 @@ RUN echo "# Installing Nodejs" && \
 # ---------
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# git-ratchet
+# Git-ratchet
+# ---------
 RUN wget --no-verbose -O /tmp/git-ratchet \
     https://github.com/iangrunert/git-ratchet/releases/download/v0.3.2/linux_amd64_git-ratchet && \
     cp /tmp/git-ratchet /usr/bin && \
     chmod 700 /usr/bin/git-ratchet
+
+# gcloud
+# --------
+export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo apt-get update && sudo apt-get install -y google-cloud-sdk
