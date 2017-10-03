@@ -19,8 +19,8 @@ RUN echo "# Installing Oracle JDK 8" && \
 # -------------
 ENV MAVEN_ROOT /var/lib/maven
 ENV MAVEN_HOME $MAVEN_ROOT/apache-maven-$MAVEN_VERSION
-ENV MAVEN_OPTS -Xms256m -Xmx3g
-ENV JAVA_OPTS -Xms256m -Xmx3g
+#ENV MAVEN_OPTS -Xms256m -Xmx3g
+#ENV JAVA_OPTS -Xms256m -Xmx3g
 ENV TZ=UTC
 
 RUN echo "# Installing Maven " && echo ${MAVEN_VERSION} && \
